@@ -140,6 +140,8 @@ public class SocketIoPanel extends JPanel {
                             if (!isConnected) {
                                 responseBody.append("Disconnected from ".concat(socketIoURL.getText()).concat("\n"));
                                 socketIoURL.setEnabled(true);
+                                connectDisconnectButton.setText("Connect");
+                                connectDisconnectButton.setEnabled(true);
                                 setStatus(false);
                             }
                         });
@@ -148,6 +150,8 @@ public class SocketIoPanel extends JPanel {
                             connectDisposable.dispose();
                             reloadSocketListener();
                             setStatus(true);
+                            connectDisconnectButton.setText("Disconnect");
+                            connectDisconnectButton.setEnabled(true);
                         }).on(EVENT_DISCONNECT, ( args) -> {
                             tryConnect.subscribe();
                         });
@@ -160,6 +164,9 @@ public class SocketIoPanel extends JPanel {
                     }
                 }
             } else {
+                // Disconnecting
+                connectDisconnectButton.setEnabled(false);
+                connectDisconnectButton.setText("Disconnecting");
                 setStatus(false);
             }
         });
@@ -185,7 +192,7 @@ public class SocketIoPanel extends JPanel {
                 String listener = vector.toString().replace(",", "").replace("[", "").replace("]", "").trim();
                 if (!socket.hasListeners(listener)) {
                     socket.on(listener, ( args) -> {
-                        String body = Arrays.toString(args).replace(",", "").replace("[", "").replace("]", "").trim();
+                        String body = Arrays.toString(args).replace("[", "").replace("]", "").trim();
                         responseBody.append(listener.concat(" : ").concat(body).concat("\n"));
                     });
                 }
@@ -208,17 +215,10 @@ public class SocketIoPanel extends JPanel {
     public void setStatus(boolean status) {
         isConnected = status;
         emitButton.setEnabled(isConnected);
-        // It always be true
-        connectDisconnectButton.setEnabled(true);
-        if (isConnected) {
-            connectDisconnectButton.setText(getButtonText());
-        } else if (socket != null) {
-            connectDisconnectButton.setText(getButtonText());
-            socket.close();
+        if (!isConnected) {
+            if (socket != null) {
+                socket.close();
+            }
         }
-    }
-
-    public String getButtonText() {
-        return isConnected ? "Disconnect" : "Connect";
     }
 }

@@ -1,9 +1,22 @@
 package analyse;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+import static guru.nidi.graphviz.model.Factory.*;
+import guru.nidi.graphviz.attribute.Color;
+import guru.nidi.graphviz.attribute.Font;
+import guru.nidi.graphviz.attribute.Rank;
+import guru.nidi.graphviz.attribute.Rank.RankDir;
+import guru.nidi.graphviz.attribute.Style;
+import guru.nidi.graphviz.engine.Format;
+import guru.nidi.graphviz.engine.Graphviz;
+import guru.nidi.graphviz.model.Graph;
+import guru.nidi.graphviz.model.MutableGraph;
 import spoon.Launcher;
 import spoon.MavenLauncher;
 import spoon.compiler.Environment;
@@ -12,6 +25,7 @@ import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
+import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.filter.TypeFilter;
 
 public class SpoonMain {
@@ -208,6 +222,8 @@ public class SpoonMain {
 		}
 		System.out.println("Le nombre maximal de paramêtre pour une méthode dans le programme est : "+nbParametreMax);
 		//Le nombre maximal de paramêtre pour une méthode dans le programme est : 7
+		
+		
 		
 		
 	}
