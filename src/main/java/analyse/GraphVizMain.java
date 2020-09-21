@@ -97,7 +97,7 @@ public class GraphVizMain {
 		
 		//Nombre de classes de l'application
 		List<CtClass> classList = model.getElements(new TypeFilter<CtClass>(CtClass.class));
-		System.out.println(classList.get(0).getSimpleName());
+		//System.out.println(classList.get(0).getSimpleName());
 		
 		
 		
@@ -122,6 +122,7 @@ public class GraphVizMain {
 		
 		try {
 			Graphviz.fromGraph(graphDeDependances).width(7500)/*.height(5000)*/.render(Format.PNG).toFile(new File("./graphe_de_dependances.png"));
+			Graphviz.fromGraph(graphDeDependances).width(7500)/*.height(5000)*/.render(Format.DOT).toFile(new File("./graphe_de_dependances.dot"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

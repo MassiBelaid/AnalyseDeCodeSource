@@ -41,12 +41,7 @@ public class MonVisiteur extends ASTVisitor{
 		
 		MethodDeclaration mdSet = cu.getAST().newMethodDeclaration();
 		mdSet.setName( cu.getAST().newSimpleName( "set"+name ) );
-		/*ASTParser parser = ASTParser.newParser(AST.JLS3);
-		parser.setSource(("this."+name+" = "+name+";").toCharArray());
-        parser.setKind(ASTParser.K_STATEMENTS);
-        Block block = (Block) parser.createAST(null);
-        mdSet.setBody(block);
-		System.out.println(mdSet);*/
+		
 		
 		MethodDeclaration mdGet = cu.getAST().newMethodDeclaration();
 		mdGet.setName( cu.getAST().newSimpleName( "get"+name ) );
