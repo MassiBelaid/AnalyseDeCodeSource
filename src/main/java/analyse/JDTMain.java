@@ -30,18 +30,19 @@ public class JDTMain {
 		CompilationUnit cu = (CompilationUnit) parser.createAST(null /* IProgressMonitor */); // parse
 		
 		
+		MonVisiteur visiteur = new MonVisiteur(cu);
+		cu.accept(visiteur);
 		
 		
 		
-		
-		cu.accept(new ASTVisitor() {
+		/*cu.accept(new ASTVisitor() {
 			 
 			Set names = new HashSet();
  
 			public boolean visit(VariableDeclarationFragment node) {
 				SimpleName name = node.getName();
 				this.names.add(name.getIdentifier());
-				System.out.println("Declaration of '"+name+node+"' at line"+cu.getLineNumber(name.getStartPosition()));
+				System.out.println("Declaration of '"+name+"' at line"+cu.getLineNumber(name.getStartPosition()));
 				
 				MethodDeclaration md = cu.getAST().newMethodDeclaration();
 				md.setName( cu.getAST().newSimpleName( "get"+name ) );
@@ -59,6 +60,6 @@ public class JDTMain {
 			}
 			
  
-		});
+		});*/
 	}
 }
